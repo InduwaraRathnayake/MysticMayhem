@@ -3,5 +3,6 @@ public class Main {
         UserData user = new UserData();
         System.out.println("Your Name : " + user.getName());
         System.out.println("Your User Name : " + user.getUserName());
+        System.out.println("Your User ID : " + user.getUserID());
     }
 }

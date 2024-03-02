@@ -76,6 +76,7 @@
 // }
 
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Scanner;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -87,6 +88,8 @@ import java.io.IOException;
 public class UserData {
     private String name;
     private String userName;
+    private int id;
+    private static HashSet<Integer> listOfInteger = new HashSet<>();
     private static HashSet<String> listOfUserNames = new HashSet<>();
     private static final String USER_NAME_FILE = "Usernames.txt";
 
@@ -100,9 +103,15 @@ public class UserData {
         if(file.exists()){
             try {
                 BufferedReader read = new BufferedReader(new FileReader(USER_NAME_FILE));
-                String userName;
-                while ((userName = read.readLine()) != null) {
+                String readLine;
+                while ((readLine = read.readLine()) != null) {
+                    String[] line = readLine.split("-");
+                    
+                    userName = line[1];
                     listOfUserNames.add(userName);
+
+                    id = Integer.parseInt(line[2]);
+                    listOfInteger.add(id);
                 }
                 read.close();
             } catch (IOException e) {
@@ -111,10 +120,10 @@ public class UserData {
         }
     }
 
-    private void saveUserName(String userName) {
+    private void saveUserName(String name, String userName, int id) {
         try {
             BufferedWriter data = new BufferedWriter(new FileWriter(USER_NAME_FILE, true));
-            data.write(userName + '\n');
+            data.write(name + "-" + userName + "-" + id +'\n');
             data.close();
         } catch (IOException e) {
             System.out.println("Error saving username: " + e.getMessage());
@@ -137,12 +146,28 @@ public class UserData {
                 System.out.println("Username already exists. Please enter a different username.");
             } else {
                 userName = newUserName;
+                id = getID();
                 listOfUserNames.add(newUserName);
-                saveUserName(newUserName);
+                saveUserName(name,newUserName,id);
             }
         }while(userNameExists);
     
         input.close();
+    }
+    
+    private int getID(){
+        Random randNum = new Random();
+
+        int newId;
+        boolean idExist;
+        do{
+            newId = randNum.nextInt(100000000);
+            idExist = listOfInteger.contains(newId);
+        }while(idExist);
+
+        listOfInteger.add(newId);
+        
+        return newId;
     }
     
     public String getName(){
@@ -151,6 +176,10 @@ public class UserData {
 
     public String getUserName(){
         return this.userName;
+    }
+
+    public int getUserID(){
+        return id;
     }
 }
 
