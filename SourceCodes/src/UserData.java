@@ -110,6 +110,9 @@ public class UserData {
         }
         saveUserName(this.name, this.userName, this.id);
         System.out.println("Your new player name is: " + name);
+
+        System.out.print("\n\n\n\nPress \"Enter\" to continue....");
+        prompt.nextLine();
     }
 
     public String getName(){
