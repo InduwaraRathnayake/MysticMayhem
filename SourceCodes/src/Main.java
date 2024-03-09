@@ -1,8 +1,7 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Main {
-    private static ArrayList<Integer> army;
+    private static HashMap<Integer, Integer> army;
 
     public static void main(String[] args) throws Exception {
         Display disObj = new Display();
@@ -14,6 +13,9 @@ public class Main {
 
         UserData whiteWolf = new UserData("GeraltofRivia", "whitewolf", 32);
 
+        army = disObj.createArmyIntial();
+        System.out.println(army);
+
         int option;
         do {
             option = disObj.showMainMenu();
@@ -23,10 +25,7 @@ public class Main {
             //Display.clearConsole();
         } while (option != 0);
 
-        for(Integer i : army){
-            System.out.println(i);
-        }
-
+        System.out.println(army);
    
     }
 
@@ -39,10 +38,10 @@ public class Main {
                 user.changeName();
                 break;
             case 3:
-                army = disObj.createArmy();
+                army = disObj.updateArmy();
                 break;
             case 4:
-
+                
                 break;
             default:
                 System.out.println("Invalid optionn");
