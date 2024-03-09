@@ -1,71 +1,12 @@
-
+package project3;
 
 public class Inventory {
 	
 	protected int attack, defence, health, speed;
-	protected double price;
+	protected int price;
 	protected String name;
 	
-    public void buy_armor(Army ar,Inventory in){
-        if (!ar.armor && user.coins>in.price) {
-            ar.updateCharacter(in,ar);
-            ar.armor=true;
-            user.coins-=in.price;
-        }else if(!ar.armor){
-            System.out.println("Your coins are not enough");
-        }else if(user.coins>in.price){
-            System.out.println("Your"+ar+"already has an armor");
-        }
-        
-    }
 
-    public void sell_armor(Army ar,Inventory in){
-        if (ar.armor) {
-            //ar.updateCharacter(in,ar);
-            ar.armor=false;
-            
-        }else if(!ar.armor){
-            System.out.println("You dont have an armor");
-        }
-        
-    }
-
-    public void buy_artfact(Army ar,Inventory in){
-        if (!ar.artfact && user.coins>in.price) {
-            ar.updateCharacter(in,ar);
-            ar.artfact=true;
-            user.coins-=in.price;
-        }else if(!ar.artfact){
-            System.out.println("Your coins are not enough");
-        }else if(user.coins>in.price){
-            System.out.println("Your"+ar+"already has an artfact");
-        }
-        
-    }
-    public void sell_artfact(Army ar,Inventory in){
-        if (ar.artfact) {
-            //ar.updateCharacter(in,ar);
-            ar.artfact=false;
-            
-        }else if(!ar.artfact){
-            System.out.println("You dont have an artfact");
-        }
-        
-    }
-
-
-    public void buy_charactor(User u1,Army ar){ // user must be have attributes of 5 solgers
-        if (!ar.artfact && user.coins>in.price) {
-            ar.updateCharacter(in,ar);
-            ar.artfact=true;
-            user.coins-=in.price;
-        }else if(!ar.artfact){
-            System.out.println("Your coins are not enough");
-        }else if(user.coins>in.price){
-            System.out.println("Your"+ar+"already has an artfact");
-        }
-      
-    }
 }
 
 class Armour extends Inventory{
@@ -161,3 +102,17 @@ class Crystal extends Artefact{
 	}
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
