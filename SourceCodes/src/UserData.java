@@ -1,12 +1,8 @@
-import java.util.HashSet;
-import java.util.Random;
-import java.util.Scanner;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.util.*;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class UserData {
     private String name;
@@ -14,14 +10,21 @@ public class UserData {
     private int id;
     private static HashSet<Integer> listOfInteger = new HashSet<>();
     private static HashSet<String> listOfUserNames = new HashSet<>();
-    private static final String USER_NAME_FILE = "Usernames.txt";
+    private static final String USER_NAME_FILE = "Userdata.txt";
 
     public UserData(){
         loadUserNames();
-        getUserData();
+        gatherUserData();
     }
 
-    private void loadUserNames() {
+    public UserData(String name, String userName, int id){{
+        this.name = name;
+        this.userName = userName;
+        this.id = id;
+    }
+
+    }
+    public void loadUserNames() {
         File file = new File(USER_NAME_FILE);
         if(file.exists()){
             try {
@@ -52,30 +55,25 @@ public class UserData {
             System.out.println("Error saving username: " + e.getMessage());
         }
     }
-
-    private void getUserData(){
+    public void gatherUserData() {
         Scanner input = new Scanner(System.in);
-        
-        System.out.print("Enter your name : "); 
+        System.out.print("Enter your name : ");
         name = input.nextLine();
-    
         String newUserName;
         boolean userNameExists;
-        do{
-            System.out.print("Enter your UserName: "); 
+        do {
+            System.out.print("Enter your UserName: ");
             newUserName = input.nextLine();
             userNameExists = listOfUserNames.contains(newUserName);
-            if(userNameExists){
+            if (userNameExists) {
                 System.out.println("Username already exists. Please enter a different username.");
             } else {
                 userName = newUserName;
                 id = getID();
                 listOfUserNames.add(newUserName);
-                saveUserName(name,newUserName,id);
+                saveUserName(name, newUserName, id);
             }
-        }while(userNameExists);
-    
-        input.close();
+        } while (userNameExists);
     }
     
     private int getID(){
@@ -92,7 +90,28 @@ public class UserData {
         
         return newId;
     }
-    
+
+    public void changeName(){
+        Scanner prompt = new Scanner (System.in);
+
+        System.out.print("Enter the new name : ");
+        String newName = prompt.nextLine();
+        name = newName;
+
+        try{
+            Path pathOffile = Paths.get(USER_NAME_FILE);
+            List<String> data = Files.readAllLines(pathOffile);
+            if (!data.isEmpty()) {
+            data.remove(data.size() - 1);
+            Files.write(pathOffile, data);
+        }
+        }catch (IOException e) {
+            System.out.println("Error removing last line: " + e.getMessage());
+        }
+        saveUserName(this.name, this.userName, this.id);
+        System.out.println("Your new player name is: " + name);
+    }
+
     public String getName(){
         return this.name;
     }
@@ -104,85 +123,8 @@ public class UserData {
     public int getUserID(){
         return id;
     }
+
+
 }
-
-// import java.util.HashSet;
-// import java.util.Scanner;
-// import java.util.Properties;
-// import java.io.FileInputStream;
-// import java.io.FileOutputStream;
-// import java.io.IOException;
-
-// public class UserData {
-//     private String name;
-//     private String userName;
-//     private static HashSet<String> listOfUserNames = new HashSet<>();
-//     private static Properties properties = new Properties();
-//     private static final String USER_NAME_FILE = "Usernames.properties";
-
-//     public UserData(){
-//         loadUserNames();
-//         getUserData();
-//     }
-
-//     private void loadUserNames() {
-//         try {
-//             FileInputStream read = new FileInputStream(USER_NAME_FILE);
-//             properties.load(read);
-//             read.close();
-//             for (String key : properties.stringPropertyNames()) {
-//                 listOfUserNames.add(properties.getProperty(key));
-//             }
-//         } catch (IOException e) {
-//             System.out.println("Error loading usernames: " + e.getMessage());
-//         }
-//     }
-
-//     private void saveUserName(String name, String userName) {
-//         try {
-//             properties.setProperty(name, userName);
-//             FileOutputStream write = new FileOutputStream(USER_NAME_FILE);
-//             properties.store(write, null);
-//             write.close();
-//         } catch (IOException e) {
-//             System.out.println("Error saving username: " + e.getMessage());
-//         }
-//     }
-
-//     private void getUserData(){
-//         Scanner input = new Scanner(System.in);
-        
-//         System.out.println("Enter your name :"); 
-//         name = input.nextLine();
-    
-//         String newUserName;
-//         boolean userNameExists;
-//         do{
-//             System.out.println("Enter your UserName:"); 
-//             newUserName = input.nextLine();
-//             userNameExists = listOfUserNames.contains(newUserName);
-//             if(userNameExists){
-//                 System.out.println("Username already exists. Please enter a different username.");
-//             }
-//         }while(userNameExists);
-    
-//         userName = newUserName;
-//         listOfUserNames.add(newUserName);
-//         saveUserName(name,newUserName);
-//         input.close();
-//     }
-    
-//     public String getName(){
-//         return this.name;
-//     }
-
-//     public String getUserName(){
-//         return this.userName;
-//     }
-
-// }
-
-
-
 
 
