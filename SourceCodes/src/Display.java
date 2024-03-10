@@ -6,11 +6,18 @@ import java.util.Scanner;
 public class Display {
     private Scanner prompt = new Scanner (System.in);
     public void welcomeMsg() {
-        System.out.println("==================================================================================");
-        System.out.println("=======(                          MYSTIC MAYHEM                            )======");
-        System.out.println("==================================================================================\n");
+        System.out.println("===================================|=|=|=|=|=|=|===================================\n");
+        System.out.println("                             |\\    /|  ");
+        System.out.println("                             ||\\  /||  ");
+        System.out.println("                             || \\/ ||  |\\    /|");
+        System.out.println("                             ||    ||  ||\\  /||");
+        System.out.println("                            _||_  _||_ || \\/ ||");
+        System.out.println("                                       ||    ||");
+        System.out.println("                                      _||_  _||_\n");
+        System.out.println("                               MYSTIC MEYHAM\n")
+        System.out.println("===================================|=|=|=|=|=|=|===================================\n");
 
-        System.out.print("\n\n\n\nPress \"Enter\" to continue....");
+        System.out.print("\n\nPress \"Enter\" to continue....");
         prompt.nextLine();
     }
 
