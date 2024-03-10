@@ -1,13 +1,13 @@
 public class Player {
-    private double coins;
+    private int coins;
     private int xp;
 
 
-    public double getCoin(){
+    public int getCoins(){
         return this.coins;
     }
 
-    public void setCoins(double coins){
+    public void setCoins(int coins){
         this.coins = coins;
     }
 

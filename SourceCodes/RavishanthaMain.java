@@ -1,23 +1,30 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
 
 public class Main {
-    private static HashMap<Integer, Integer> army;
-    private static List<Army> characters = new ArrayList<>();
+	
+	public static List<Army> your_army() {
+		
+		Scanner inp = new Scanner(System.in);
 
-    public static void main(String[] args) throws Exception {
-        //1
-        Display disObj = new Display();
-        disObj.welcomeMsg();
+		HashMap<Integer, Integer> map = new HashMap<>();
+		for (int k=0; k<5;k++) {
+			int key,value;
+			key = inp.nextInt();
+			
+			value = inp.nextInt();
+	        map.put(key, value); 
 
-        //2
-        UserData user = new UserData();
+		}
 
-        //3
-        UserData whiteWolf = new UserData("GeraltofRivia", "whitewolf", 32);
+        // Create a list to store the characters
+        List<Army> characters = new ArrayList<>();
 
-        //4
-        army = disObj.createArmyInitial();
-        for (Map.Entry<Integer, Integer> entry : army.entrySet()) {
+        // Loop through the HashMap
+        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
             int key = entry.getKey();
             int value = entry.getValue();
 
@@ -119,34 +126,31 @@ public class Main {
                 	}
             }
         }
-
-        int option;
-        do {
-            option = disObj.showMainMenu();
-            Main.showMyMainMenu(option, user, disObj);
-        } while (option != 0);
-   
-    }
-
-    public static void showMyMainMenu(int option, UserData user, Display disObj){
-        switch(option){
-            case 1:
-                disObj.displayProfile(user);
-                break;
-            case 2:
-                user.changeName();
-                break;
-            case 3:
-                army = disObj.updateArmy();
-                break;
-            case 4:
-                
-                break;
-            default:
-                System.out.println("Invalid optionn");
-                break;
-
+        
+        
+        for (Army character : characters) {
+            System.out.println(character.getter());
         }
 
-    }
+		
+		return characters;
+	}
+	
+	
+	
+	
+	public static void main(String[] args) {
+		
+		//Player p1 = new Player();
+		
+		List<Army> army = your_army();
+        
+        
+		
+		
+		
+		
+	}
+	
+
 }
