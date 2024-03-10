@@ -1,37 +1,42 @@
-public HashMap<Integer,Integer> createArmyIntial(){
-    HashMap<Integer,Integer> ouputHashMap =new HashMap<Integer,Integer>(); 
-    Scanner prompt_1 = new Scanner (System.in);
-    int warriorCategory =1,warrior;
+public HashMap<Integer, Integer> createArmyInitial() {
+    HashMap<Integer, Integer> outputHashMap = new HashMap<>();
+    Scanner prompt_1 = new Scanner(System.in);
+    int warriorCategory = 1, warrior;
 
     System.out.println("Create your Army");
 
-    while(warriorCategory >0&&warriorCategory<6){
-        while(true){
+    while (warriorCategory > 0 && warriorCategory < 6) {
+        while (true) {
             printArmyChoices(warriorCategory);
             System.out.println();
             System.out.print("Choose your preference:  ");
-            warrior = prompt_1.nextInt();
-            prompt_1.nextLine();
 
-            if(warrior>5||warrior<1){
-                System.out.println("Invalid entry. Please Retry\n");
-                continue;
+            try {
+                warrior = prompt_1.nextInt();
+                prompt_1.nextLine();
+
+                if (warrior > 5 || warrior < 1) {
+                    System.out.println("Invalid entry. Please Retry\n");
+                    continue;
+                }
+                outputHashMap.put(warriorCategory, warrior);
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a valid integer.");
+                prompt_1.nextLine(); // Clear the buffer
             }
-            ouputHashMap.put(warriorCategory,warrior);
-            break;
         }
-        warriorCategory++;        
+        warriorCategory++;
     }
-    return ouputHashMap;
+    return outputHashMap;
 }
 
-public HashMap<Integer,Integer> updateArmy(){
-    HashMap<Integer,Integer> ouputList =new HashMap<Integer,Integer>(); 
-    Scanner prompt_1 = new Scanner (System.in);
-    int warriorCategory,warrior;
+public HashMap<Integer, Integer> updateArmy() {
+    HashMap<Integer, Integer> outputHashMap = new HashMap<>();
+    Scanner prompt_1 = new Scanner(System.in);
+    int warriorCategory, warrior;
 
-    while(true){
-
+    while (true) {
         System.out.println("Which warrior do you need to upgrade or buy");
         System.out.println("    1. ARCHER");
         System.out.println("    2. KNIGHT");
@@ -40,37 +45,49 @@ public HashMap<Integer,Integer> updateArmy(){
         System.out.println("    5. MYTHICAL CREATURE");
         System.out.println("    0. EXIT");
         System.out.print("Enter your option: ");
-        warriorCategory = prompt_1.nextInt();
-        prompt_1.nextLine();
 
-        if(0<=warriorCategory&&warriorCategory<7){
-            break;
+        try {
+            warriorCategory = prompt_1.nextInt();
+            prompt_1.nextLine();
+
+            if (0 <= warriorCategory && warriorCategory < 7) {
+                break;
+            }
+
+            System.out.println("Invalid entry");
+            System.out.println("Please Re-enter");
+        } catch (InputMismatchException e) {
+            System.out.println("Invalid input. Please enter a valid integer.");
+            prompt_1.nextLine(); // Clear the buffer
         }
-
-        System.out.println("Invlaid entry");
-        System.out.println("Please Re-enter");
     }
 
-    if(warriorCategory == 0){
-        ouputHashMap.put(0,0);
-        return ouputHashMap;
+    if (warriorCategory == 0) {
+        outputHashMap.put(0, 0);
+        return outputHashMap;
     }
 
-    while(true){
+    while (true) {
         printArmyChoices(warriorCategory);
         System.out.println("Enter 0 to exit\n");
         System.out.print("Enter your option: ");
-        warrior = prompt_1.nextInt();
-        prompt_1.nextLine();
-        if(warrior<0||warrior>7){
-            System.out.println("Invalid Entry");
-            System.out.println("Please Re-enter\n");
-            continue;
-        }
-        ouputHashMap.put(warriorCategory,warrior);
-        return ouputHashMap;
-    }
 
+        try {
+            warrior = prompt_1.nextInt();
+            prompt_1.nextLine();
+
+            if (warrior < 0 || warrior > 7) {
+                System.out.println("Invalid Entry");
+                System.out.println("Please Re-enter\n");
+                continue;
+            }
+            outputHashMap.put(warriorCategory, warrior);
+            return outputHashMap;
+        } catch (InputMismatchException e) {
+            System.out.println("Invalid input. Please enter a valid integer.");
+            prompt_1.nextLine(); // Clear the buffer
+        }
+    }
 }
 
 public void printArmyChoices(int warriorCategory){
