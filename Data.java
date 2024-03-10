@@ -1,12 +1,37 @@
 package project3;
 
-
+// this is the corrected data class from ravishan...
 class Army {
 	private String name;
 	private int Price, Attack, Defence, Health, Speed;
+	public char[] getDefence;
 	
 	public String getter(){
         return this.name;
+    }
+	
+	public String getName() {
+        return name;
+    }
+
+    public int getPrice() {
+        return Price;
+    }
+
+    public int getAttack() {
+        return Attack;
+    }
+
+    public int getDefence() {
+        return Defence;
+    }
+
+    public int getHealth() {
+        return Health;
+    }
+
+    public int getSpeed() {
+        return Speed;
     }
 	
 	
@@ -35,20 +60,20 @@ class Army {
     }
     
     
-	public void updateCharacter(Inventory i , Army ar) {
-		ar.Price += (int) (ar.Price * 0.2);
-		ar.Attack = ar.Attack + i.attack;
-		ar.Defence = ar.Defence + i.defence;
-		ar.Health = ar.Health + i.health;
-		ar.Speed = ar.Speed + i.speed;
-	}
+	public void addEquipment(Inventory i , Army ar) {
+		ar.setPrice(ar.getPrice()+(int)(i.getprice()*0.2));
+		ar.setAttack(ar.getAttack()+i.getattack());
+		ar.setDefence(ar.getDefence()+i.getdefence());
+		ar.setHealth(ar.getHealth()+i.gethealth());
+		ar.setSpeed(ar.getSpeed()+i.getspeed());
+	}	
 	
 	public void removeEquipment(Inventory i, Army ar) {
-		ar.Price -= (int) (ar.Price * 0.2);
-		ar.Attack = ar.Attack - i.attack;
-		ar.Defence = ar.Defence - i.defence;
-		ar.Health = ar.Health - i.health;
-		ar.Speed = ar.Speed - i.speed;
+		ar.setPrice(ar.getPrice()-(int)(i.getprice()*0.2));
+		ar.setAttack(ar.getAttack()-i.getattack());
+		ar.setDefence(ar.getDefence()-i.getdefence());
+		ar.setHealth(ar.getHealth()-i.gethealth());
+		ar.setSpeed(ar.getSpeed()-i.getspeed());
 	}
 	
 	
@@ -366,11 +391,11 @@ public class Data {
 		Inventory i1 = new Chainmail();
 		Army ar1 = new Zoro(); 
 		
-		System.out.println(ar1.Defence);
-		ar1.updateCharacter(i1 , ar1);
-		System.out.println(ar1.Defence);
+		System.out.println(ar1.getDefence());
+		ar1.addEquipment(i1 , ar1);
+		System.out.println(ar1.getDefence());
 		ar1.removeEquipment(i1, ar1);
-		System.out.println(ar1.Defence);
+		System.out.println(ar1.getDefence());
 		
 	}
 }
