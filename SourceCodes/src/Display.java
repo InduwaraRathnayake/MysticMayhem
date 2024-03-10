@@ -7,14 +7,14 @@ public class Display {
     private Scanner prompt = new Scanner (System.in);
     public void welcomeMsg() {
         System.out.println("===================================|=|=|=|=|=|=|===================================\n");
-        System.out.println("                             |\\    /|  ");
-        System.out.println("                             ||\\  /||  ");
-        System.out.println("                             || \\/ ||  |\\    /|");
-        System.out.println("                             ||    ||  ||\\  /||");
-        System.out.println("                            _||_  _||_ || \\/ ||");
-        System.out.println("                                       ||    ||");
-        System.out.println("                                      _||_  _||_\n");
-        System.out.println("                               MYSTIC MEYHAM\n")
+        System.out.println("                                 |\\    /|  ");
+        System.out.println("                                 ||\\  /||  ");
+        System.out.println("                                 || \\/ ||  |\\    /|");
+        System.out.println("                                 ||    ||  ||\\  /||");
+        System.out.println("                                _||_  _||_ || \\/ ||");
+        System.out.println("                                           ||    ||");
+        System.out.println("                                          _||_  _||_\n");
+        System.out.println("                                   MYSTIC MEYHAM\n")
         System.out.println("===================================|=|=|=|=|=|=|===================================\n");
 
         System.out.print("\n\nPress \"Enter\" to continue....");
@@ -23,9 +23,9 @@ public class Display {
 
     public int showMainMenu(){
 
-        System.out.println("==================================================================================");
-        System.out.println("=======(                            MAIN MENU                              )======");
-        System.out.println("==================================================================================\n");
+        System.out.println("===================================|o|O|O|O|O|o|===================================");
+        System.out.println("<><><><><><><><><><><                MAIN MENU                ><><><><><><><><><><>");
+        System.out.println("===================================|o|O|O|O|O|o|===================================\n");
 
         System.out.println("1. View Profile");
         System.out.println("2. Change Player name");
@@ -60,9 +60,9 @@ public class Display {
     }
 
     public void displayProfile(UserData userObj){
-        System.out.println("==================================================================================");
-        System.out.println("=======(                          USER PROFILE                             )======");
-        System.out.println("==================================================================================\n"); 
+        System.out.println("===================================|o|O|O|O|O|o|===================================");
+        System.out.println("<><><><><><><><><><><               USER PROFILE              ><><><><><><><><><><>"");
+        System.out.println("===================================|o|O|O|O|O|o|===================================\n"); 
         
         System.out.println("        Player name: "+ userObj.getName());
         System.out.println("        User name: "+ userObj.getUserName());
