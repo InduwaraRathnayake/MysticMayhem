@@ -7,7 +7,7 @@ public HashMap<Integer, Integer> createArmyInitial() {
 
     while (warriorCategory > 0 && warriorCategory < 6) {
         while (true) {
-            printArmyChoices(warriorCategory);
+            printChoices(warriorCategory);
             System.out.println();
             System.out.print("Choose your preference:  ");
 
@@ -30,6 +30,61 @@ public HashMap<Integer, Integer> createArmyInitial() {
     }
     return outputHashMap;
 }
+public HashMap<Integer, Integer> addEquipments() {
+    HashMap<Integer, Integer> outputHashMap = new HashMap<>();
+    Scanner prompt_1 = new Scanner(System.in);
+    int equipmentCategory, equipment;
+
+    while (true) {
+        System.out.println("Which equipment do you need to buy");
+        System.out.println("    1. ARMOUR");
+        System.out.println("    2. ARTIFACT");
+        System.out.println("    0. EXIT");
+        System.out.print("Enter your option: ");
+
+        try {
+            equipmentCategory = prompt_1.nextInt();
+            prompt_1.nextLine();
+
+            if (0 <= equipmentCategory && equipmentCategory < 3) {
+                break;
+            }
+
+            System.out.println("Invalid entry");
+            System.out.println("Please Re-enter");
+        } catch (InputMismatchException e) {
+            System.out.println("Invalid input. Please enter a valid integer.");
+            prompt_1.nextLine(); // Clear the buffer
+        }
+    }
+
+    if (equipmentCategory == 0) {
+        outputHashMap.put(0, 0);
+        return outputHashMap;
+    }
+
+    while (true) {
+        printChoices(equipmentCategory);
+        System.out.println("Enter 0 to exit\n");
+        System.out.print("Enter your option: ");
+
+        try {
+            warrior = prompt_1.nextInt();
+            prompt_1.nextLine();
+
+            if (equipment < 0 || equipment > 2) {
+                System.out.println("Invalid Entry");
+                System.out.println("Please Re-enter\n");
+                continue;
+            }
+            outputHashMap.put(equipmentCategory, equipment);
+            return outputHashMap;
+        } catch (InputMismatchException e) {
+            System.out.println("Invalid input. Please enter a valid integer.");
+            prompt_1.nextLine(); // Clear the buffer
+        }
+    }
+}
 
 public HashMap<Integer, Integer> updateArmy() {
     HashMap<Integer, Integer> outputHashMap = new HashMap<>();
@@ -50,7 +105,7 @@ public HashMap<Integer, Integer> updateArmy() {
             warriorCategory = prompt_1.nextInt();
             prompt_1.nextLine();
 
-            if (0 <= warriorCategory && warriorCategory < 7) {
+            if (0 <= warriorCategory && warriorCategory < 6) {
                 break;
             }
 
@@ -68,7 +123,7 @@ public HashMap<Integer, Integer> updateArmy() {
     }
 
     while (true) {
-        printArmyChoices(warriorCategory);
+        printChoices(warriorCategory);
         System.out.println("Enter 0 to exit\n");
         System.out.print("Enter your option: ");
 
@@ -76,7 +131,7 @@ public HashMap<Integer, Integer> updateArmy() {
             warrior = prompt_1.nextInt();
             prompt_1.nextLine();
 
-            if (warrior < 0 || warrior > 7) {
+            if (warrior < 0 || warrior > 5) {
                 System.out.println("Invalid Entry");
                 System.out.println("Please Re-enter\n");
                 continue;
@@ -90,8 +145,9 @@ public HashMap<Integer, Integer> updateArmy() {
     }
 }
 
-public void printArmyChoices(int warriorCategory){
-    switch(warriorCategory){
+
+public void printChoices(int category){
+    switch(category){
         case 1:
             System.out.println("=======================================================================================================================");
             System.out.println("                                                      ARCHERS");
@@ -161,7 +217,35 @@ public void printArmyChoices(int warriorCategory){
             System.out.println(" Speed: 8                Speed: 12                Speed: 11                 Speed: 19                Speed: 20");
             System.out.println();
             break;
-            
+           
+        case 6:
+            System.out.println("===========================================================================");
+            System.out.println("                                ARMOURS");
+            System.out.println("===========================================================================\n");
+            System.out.println(" 1).                     2).                      3).                 ");
+            System.out.println(" Name: Chainmail         Name: Regalia            Name: Fleece           ");
+            System.out.println(" Price: 70 gc            Price: 105 gc            Price: 150 gc          ");
+            System.out.println(" Attack: no change       Attack: no change        Attack: no change    ");
+            System.out.println(" Defence: +1             Defence: +1              Defence: +2            ");
+            System.out.println(" Health: no change       Health: no change        Health: +1            ");
+            System.out.println(" Speed: -1               Speed: no change         Speed: -1             ");
+            System.out.println();
+            break;
+
+        case 7:
+            System.out.println("===========================================================================");
+            System.out.println("                               ARTIFACTS");
+            System.out.println("===========================================================================\n");
+            System.out.println(" 1).                     2).                      3).                 ");
+            System.out.println(" Name: Excalibur         Name: Amulet             Name: Crystal           ");
+            System.out.println(" Price: 150 gc           Price: 200 gc            Price: 210 gc          ");
+            System.out.println(" Attack: +2              Attack: +1               Attack: +2    ");
+            System.out.println(" Defence: no change      Defence: -1              Defence: +1            ");
+            System.out.println(" Health: no change       Health: +1               Health: -1            ");
+            System.out.println(" Speed: no change        Speed: +1                Speed: -1             ");
+            System.out.println();
+            break;
+         
         default:            //redundant
             break;
         
