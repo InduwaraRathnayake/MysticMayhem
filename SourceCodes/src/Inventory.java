@@ -53,22 +53,22 @@ public class Inventory {
         this.name=name;
     }
 
-    public void buyArmor(Army ar,Inventory in,Player user){
-        if (!ar.getArmor() && user.getCoins()>in.getPrice()) {
-            ar.addEquipment(in,ar);
+    public void buyArmor(Army ar,Player user){
+        if (!ar.getArmor() && user.getCoins()>this.getPrice()) {
+            ar.addEquipment(this,ar);
             ar.setArmor(true);
-            int coin=user.getCoins()-in.getPrice();
+            long coin=user.getCoins()-this.getPrice();
             user.setCoins(coin);
         }else if(!ar.getArmor()){
             System.out.println("You dont have enough coins!!!");
-        }else if(user.getCoins()>in.getPrice()){
+        }else if(user.getCoins()>this.getPrice()){
             System.out.println("Your"+ar.getName()+"already has an armor");
         }
     }
 
-    public void sellArmor(Army ar,Inventory in){
+    public void sellArmor(Army ar){
         if (ar.getArmor()) {
-            ar.removeEquipment(in,ar);
+            ar.removeEquipment(this,ar);
             ar.setArmor(false);
             
         }else if(!ar.getArmor()){
@@ -76,22 +76,22 @@ public class Inventory {
         }   
     }
 
-    public void buyArtfact(Army ar,Inventory in,Player user){
-        if (!ar.getArtfact() && user.getCoins()>in.getPrice()) {
-            ar.addEquipment(in,ar);
-            ar.setArmor(true);;
-            int coin=user.getCoins()-in.getPrice();
+    public void buyArtfact(Army ar,Player user){
+        if (!ar.getArtfact() && user.getCoins()>this.getPrice()) {
+            ar.addEquipment(this,ar);
+            ar.setArmor(true);
+            long coin=user.getCoins()-this.getPrice();
             user.setCoins(coin);
         }else if(!ar.getArtfact()){
             System.out.println("You dont have enough coins!!!");
-        }else if(user.getCoins()>in.getPrice()){
+        }else if(user.getCoins()>this.getPrice()){
             System.out.println("Your"+ar.getName()+"already has an artfact");
         }
         
     }
-    public void sellArtfact(Army ar,Inventory in){
+    public void sellArtfact(Army ar){
         if (ar.getArtfact()) {
-            ar.removeEquipment(in,ar);
+            ar.removeEquipment(this,ar);
             ar.setArmor(false);
             
         }else if(!ar.getArtfact()){

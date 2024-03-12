@@ -1,100 +1,112 @@
-// import java.util.Collections;
-// import java.util.Comparator;
-// import java.util.List;
-// import java.util.Random;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
-// public class Battle {
+public class Battle {
+    
+    public void winWar(Player user, Player npc, boolean win){
+        long newUserCoins;
+        long newNpcCoins;
+        if(win){
+            newUserCoins = Math.round(user.getCoins() + npc.getCoins()*0.1);
+            user.setCoins(newUserCoins);
 
-//     private static final int MAX_TURNS = 10;
+            newNpcCoins = Math.round(npc.getCoins() - npc.getCoins()*0.1);
+            npc.setCoins(newNpcCoins);
+        }
+        else{
+            newUserCoins = Math.round(npc.getCoins() + user.getCoins()*0.1);
+            npc.setCoins(newUserCoins);
 
-//     public void startWar(Player player1, Player player2) {
-//         List<Army> player1Army = player1.getArmy(); //list
-//         List<Army> player2Army = player2.getArmy();
+            newNpcCoins = Math.round(user.getCoins() - user.getCoins()*0.1);
+            user.setCoins(newNpcCoins);
+        }
+    }
+//Healer < Mage < Mythical Creature < Knight < Archer
+    private List<Army> piorityAttack(List<Army> setOfArmy){
+        List<Army> sortedArmy = new ArrayList<>(); //{0,0,0,0,0,0}  A[0]=healer A={healer,0,0,0,Archer}
 
-//         // Sort armies by speed in descending order
-//         sortArmiesBySpeed(player1Army);
-//         sortArmiesBySpeed(player2Army);
+        for(int i=0; i<5; i++){
+            sortedArmy.add(null);
+        }
+        for(Army ar : setOfArmy){
+            if( ar instanceof Healer){
+                sortedArmy.set(0, ar);
+            }
+            else if( ar instanceof Mage){
+                sortedArmy.set(1, ar);
+            }
+            else if( ar instanceof MythicalCreature){
+                sortedArmy.set(2, ar);
+            }
+            else if( ar instanceof Knight){
+                sortedArmy.set(3, ar);
+            }
+            else{
+                sortedArmy.set(4, ar);
+            }
+        }
+        return sortedArmy;
+    }
 
-//         // Determine the player who takes the first turn
-//         boolean player1First = determineFirstPlayer(player1Army, player2Army);
+    //Mage < Knight< Archer < Mythical Creature < Healer
+    private List<Army> piorityDefence(List<Army> setOfArmy){
+        List<Army> sortedArmy = new ArrayList<>(); //{0,0,0,0,0,0}  A[0]=healer A={healer,0,0,0,Archer}
 
-//         for (int turn = 1; turn <= MAX_TURNS; turn++) {
-//             System.out.println("Turn " + turn);
+        for(int i=0; i<5; i++){
+            sortedArmy.add(null);
+        }
+        for(Army ar : setOfArmy){
+            if( ar instanceof Mage){
+                sortedArmy.set(0, ar);
+            }
+            else if( ar instanceof Knight){
+                sortedArmy.set(1, ar);
+            }
+            else if( ar instanceof Archer){
+                sortedArmy.set(2, ar);
+            }
+            else if( ar instanceof MythicalCreature){
+                sortedArmy.set(3, ar);
+            }
+            else{
+                sortedArmy.set(4, ar);
+            }
+        }
+        return sortedArmy;
+    }
 
-//             // Perform attacks for each player
-//             performAttacks(player1, player2, player1Army, player2Army, player1First);
-//             performAttacks(player2, player1, player2Army, player1Army, !player1First);
+    public void stratWar(List<Army> userArmy,List<Army> npcArmy){
+        //{whitewolf} search 
 
-//             // Check for battle end conditions
-//             if (isBattleOver(player1Army) || isBattleOver(player2Army)) {
-//                 break;
-//             }
-//         }
+        int truns = 10;
 
-//         // Restore armies to their initial state after the battle
-//         player1.restoreArmy();
-//         player2.restoreArmy();
-//     }
+        while(truns-- >0){
+            //user-> npc
+            List<Army> attOrderOfUser = piorityAttack(userArmy);
+            List<Army> defOrderOfnpc = piorityDefence(npcArmy);
+            Collections.sort(attOrderOfUser, Comparator.comparingDouble(a -> a.getSpeed()));  //5
+            Collections.sort(defOrderOfnpc, Comparator.comparingDouble(a -> a.getDefence())); //1
 
-//     private void sortArmiesBySpeed(List<Army> army) {
-//         army.sort(Comparator.comparingInt(Army::getSpeed).reversed());
-//     }
+            double health ;
+            Army defender = defOrderOfnpc.get(0);
+            Army attacker = attOrderOfUser.get(4);
 
-//     private boolean determineFirstPlayer(List<Army> player1Army, List<Army> player2Army) {
-//         return player1Army.get(0).getSpeed() >= player2Army.get(0).getSpeed();
-//     }
+            health = defender.getHealth()- attacker.getAttack()*0.5 +  defender.getDefence()*0.1;
+            defender.setHealth(health);
 
-//     private void performAttacks(Player attacker, Player defender, List<Army> attackingArmy,
-//                                 List<Army> defendingArmy, boolean firstPlayer) {
-//         for (Army attackerCharacter : attackingArmy) {
-//             if (attackerCharacter.getHealth() <= 0) {
-//                 continue; // Skip dead characters
-//             }
+            if(defender.getHealth()<=0){
+                defOrderOfnpc.remove(0);
+            }
+            //npc -> user
+            
 
-//             // Determine the target based on home ground effects
-//             Army target = determineTarget(defender, defendingArmy, firstPlayer);
 
-//             // Perform attack based on character type
-//             if (attackerCharacter instanceof Healer) {
-//                 performHealerAttack((Healer) attackerCharacter, attacker, attackingArmy);
-//             } else {
-//                 performNormalAttack(attackerCharacter, target);
-//             }
+            //{a, k, m, o, d} // d<o<m , a>k //d=m=o, a=k // // {k, a, d, o, m}
+        }
+    }
+    
+}
 
-//             // Check for battle end conditions after each attack
-//             if (isBattleOver(defendingArmy)) {
-//                 break;
-//             }
-//         }
-//     }
 
-//     private Army determineTarget(Player defender, List<Army> defendingArmy, boolean firstPlayer) {
-//         // Implement logic to determine the target based on home ground effects and priorities
-//         // ...
-
-//         // For now, target the first character in the defending army
-//         return defendingArmy.get(0);
-//     }
-
-//     private void performNormalAttack(Army attacker, Army target) {
-//         double damage = 0.5 * attacker.getAttack() - 0.1 * target.getDefence();
-//         target.reduceHealth(damage);
-//         System.out.println(attacker.getName() + " attacks " + target.getName() + " for " + damage + " damage.");
-//     }
-
-//     private void performHealerAttack(Healer healer, Player attacker, List<Army> attackingArmy) {
-//         Army target = getLowestHealthCharacter(attackingArmy);
-//         double healing = 0.1 * healer.getAttack();
-//         target.increaseHealth(healing);
-//         System.out.println(healer.getName() + " heals " + target.getName() + " for " + healing + " health.");
-//     }
-
-//     private Army getLowestHealthCharacter(List<Army> army) {
-//         return Collections.min(army, Comparator.comparingDouble(Army::getHealth));
-//     }
-
-//     private boolean isBattleOver(List<Army> army) {
-//         // Check if all characters in the army are dead
-//         return army.stream().allMatch(character -> character.getHealth() <= 0);
-//     }
-// }

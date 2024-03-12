@@ -14,7 +14,7 @@ public class Display {
         System.out.println("                            _||_  _||_ || \\/ ||");
         System.out.println("                                       ||    ||");
         System.out.println("                                      _||_  _||_\n");
-        System.out.println("                               MYSTIC MEYHAM\n")
+        System.out.println("                               MYSTIC MEYHAM\n");
         System.out.println("===================================|=|=|=|=|=|=|===================================\n");
 
         System.out.print("\n\nPress \"Enter\" to continue....");
@@ -49,11 +49,6 @@ public class Display {
                 System.out.println("Invalid option. Please enter a valid option between 0 and 4.");
             }
         } while (true);
-        
-        // int option;
-        // System.out.print("Enter your option: ");
-        // option = prompt.nextInt();
-        // prompt.nextLine();
 
         return option;
         
@@ -61,12 +56,10 @@ public class Display {
 
     public void displayProfile(UserData userObj){
         System.out.println("===================================|o|O|O|O|O|o|===================================");
-        System.out.println("<><><><><><><><><><><               USER PROFILE              ><><><><><><><><><><>"");
+        System.out.println("<><><><><><><><><><><               USER PROFILE              ><><><><><><><><><><>");
         System.out.println("===================================|o|O|O|O|O|o|===================================\n"); 
         
-        System.out.println("        Player name: "+ userObj.getName());
-        System.out.println("        User name: "+ userObj.getUserName());
-        System.out.println("        Player ID: "+ userObj.getUserID());
+        userObj.printUserData();
 
         System.out.print("\n\n\n\nPress \"Enter\" to continue....");
         prompt.nextLine();
@@ -84,17 +77,16 @@ public class Display {
             // Unix/Linux/Mac: Use "clear" to clear the console
             processBuilder = new ProcessBuilder("clear");
         }
-
         processBuilder.inheritIO().start().waitFor();
     }
 
-public HashMap<Integer, Integer> createArmyInitial() {
+public HashMap<Integer, Integer> createArmyInitial(Player player) {
     HashMap<Integer, Integer> outputHashMap = new HashMap<>();
     Scanner prompt_1 = new Scanner(System.in);
     int warriorCategory = 1, warrior;
 
     System.out.println("Create your Army");
-
+    
     while (warriorCategory > 0 && warriorCategory < 6) {
         while (true) {
             printArmyChoices(warriorCategory);

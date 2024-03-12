@@ -1,8 +1,20 @@
 class Army {
 	private String name;
-	private int Price, Attack, Defence, Health, Speed;
+	private double price, attack, defence, health, speed;
     private boolean armor = false, artfact = false;
+    
+    private int homeground;
 	
+    public void setHomeGround(int homeground){
+        //highlanders = 1;
+        //marshlanders = 2;
+        //sunchildren = 3;
+        //mystics = 4;
+        this.homeground = homeground;
+    }
+    public int getHomeGround(){
+        return this.homeground;
+    }
     public Army returnArmy(){
         return this;
     }
@@ -22,41 +34,41 @@ class Army {
         return this.name;
     }
 	public String getName() {
-        return name;
+        return this.name;
     }
-    public int getPrice() {
-        return Price;
+    public double getPrice() {
+        return this.price;
     }
-    public int getAttack() {
-        return Attack;
+    public double getAttack() {
+        return this.attack;
     }
-    public int getDefence() {
-        return Defence;
+    public double getDefence() {
+        return this.defence;
     }
-    public int getHealth() {
-        return Health;
+    public double getHealth() {
+        return this.health;
     }
-    public int getSpeed() {
-        return Speed;
+    public double getSpeed() {
+        return this.speed;
     }
 
     public void setName(String name) {
         this.name = name;
     }
-    public void setPrice(int Price) {
-        this.Price = Price;
+    public void setPrice(double price) {
+        this.price = price;
     }
-    public void setAttack(int Attack) {
-        this.Attack = Attack;
+    public void setAttack(double attack) {
+        this.attack = attack;
     }
-    public void setDefence(int Defence) {
-        this.Defence = Defence;
+    public void setDefence(double defence) {
+        this.defence = defence;
     }
-    public void setHealth(int Health) {
-        this.Health = Health;
+    public void setHealth(double health) {
+        this.health = health;
     }
-    public void setSpeed(int Speed) {
-        this.Speed = Speed;
+    public void setSpeed(double speed) {
+        this.speed = speed;
     }
     
 	public void addEquipment(Inventory i , Army ar) {
@@ -100,6 +112,7 @@ class Shooter extends Archer {
 	setDefence(4);
 	setHealth(6);
 	setSpeed(9);
+    setHomeGround(1);
 	}
 }
 class Ranger extends Archer{
@@ -110,6 +123,7 @@ class Ranger extends Archer{
 	setDefence(5);
 	setHealth(8);
 	setSpeed(10);
+    setHomeGround(1);
 	}
 }
 class Sunfire extends Archer {
@@ -120,6 +134,7 @@ class Sunfire extends Archer {
 	setDefence(5);
 	setHealth(7);
 	setSpeed(14);
+    setHomeGround(3);
 	}
 }
 class Zing extends Archer {
@@ -130,6 +145,8 @@ class Zing extends Archer {
 	setDefence(9);
 	setHealth(11);
 	setSpeed(14);
+    setHomeGround(3);
+    
 	}
 }
 
@@ -141,6 +158,8 @@ class Saggitarius extends Archer {
 	setDefence(7);
 	setHealth(12);
 	setSpeed(17);
+    setHomeGround(4);
+
 	}
 }
 
@@ -152,6 +171,7 @@ class Squire extends Knight{
 	setDefence(9);
 	setHealth(7);
 	setSpeed(8);
+    setHomeGround(2);
 	}
 }
 
@@ -163,6 +183,8 @@ class Cavalier extends Knight{
 	setDefence(12);
 	setHealth(7);
 	setSpeed(10);
+    setHomeGround(1);
+
 	}
 }
 class Templar extends Knight{
@@ -173,6 +195,8 @@ class Templar extends Knight{
 	setDefence(16);
 	setHealth(12);
 	setSpeed(12);
+    setHomeGround(3);
+
 	}
 }
 class Zoro extends Knight{
@@ -183,6 +207,8 @@ class Zoro extends Knight{
 	setDefence(16);
 	setHealth(13);
 	setSpeed(14);
+    setHomeGround(1);
+
 	}
 }
 class Swiftblade extends Knight{
@@ -193,6 +219,8 @@ class Swiftblade extends Knight{
 	setDefence(20);
 	setHealth(17);
 	setSpeed(13);
+    setHomeGround(2);
+
 	}
 }
 class Warlock extends Mage{
@@ -203,6 +231,8 @@ class Warlock extends Mage{
 	setDefence(7);
 	setHealth(10);
 	setSpeed(12);
+    setHomeGround(2);
+
 	}
 }
 class Illusionist extends Mage{
@@ -213,6 +243,8 @@ class Illusionist extends Mage{
 	setDefence(8);
 	setHealth(12);
 	setSpeed(14);
+    setHomeGround(4);
+
 	}
 }
 class Enchanter extends Mage{
@@ -223,6 +255,8 @@ class Enchanter extends Mage{
 	setDefence(10);
 	setHealth(13);
 	setSpeed(16);
+    setHomeGround(1);
+
 	}
 }
 class Conjurer extends Mage{
@@ -233,6 +267,8 @@ class Conjurer extends Mage{
 	setDefence(15);
 	setHealth(14);
 	setSpeed(12);
+    setHomeGround(1);
+
 	}
 }
 class Eldritch extends Mage{
@@ -243,6 +279,7 @@ class Eldritch extends Mage{
 	setDefence(17);
 	setHealth(18);
 	setSpeed(14);
+    setHomeGround(4);
 	}
 }
 class Soother extends Healer{
@@ -253,6 +290,7 @@ class Soother extends Healer{
 	setDefence(8);
 	setHealth(9);
 	setSpeed(6);
+    setHomeGround(3);
 	}
 }
 class Medic extends Healer{
@@ -263,6 +301,8 @@ class Medic extends Healer{
 	setDefence(9);
 	setHealth(10);
 	setSpeed(7);
+    setHomeGround(1);
+
 	}
 }
 class Alchemist extends Healer{
@@ -273,6 +313,7 @@ class Alchemist extends Healer{
 	setDefence(13);
 	setHealth(13);
 	setSpeed(13);
+    setHomeGround(2);
 	}
 }
 class Saint extends Healer{
@@ -283,6 +324,8 @@ class Saint extends Healer{
 	setDefence(14);
 	setHealth(17);
 	setSpeed(9);
+    setHomeGround(4);
+
 	}
 }
 class Lightbringer extends Healer{
@@ -293,6 +336,8 @@ class Lightbringer extends Healer{
 	setDefence(15);
 	setHealth(19);
 	setSpeed(12);
+    setHomeGround(3);
+
 	}
 }
 class Dragon extends MythicalCreature{
@@ -303,6 +348,7 @@ class Dragon extends MythicalCreature{
 	setDefence(14);
 	setHealth(15);
 	setSpeed(8);
+    setHomeGround(3);
 	}
 }
 class Basilisk extends MythicalCreature{
@@ -313,6 +359,7 @@ class Basilisk extends MythicalCreature{
 	setDefence(11);
 	setHealth(10);
 	setSpeed(12);
+    setHomeGround(2);
 	}
 }
 class Hydra extends MythicalCreature{
@@ -323,6 +370,7 @@ class Hydra extends MythicalCreature{
 	setDefence(16);
 	setHealth(15);
 	setSpeed(11);
+    setHomeGround(2);
 	}
 }
 class Phoenix extends MythicalCreature{
@@ -333,6 +381,7 @@ class Phoenix extends MythicalCreature{
 	setDefence(13);
 	setHealth(17);
 	setSpeed(19);
+    setHomeGround(3);
 	}
 }
 class Pegasus extends MythicalCreature{
@@ -343,5 +392,7 @@ class Pegasus extends MythicalCreature{
 	setDefence(18);
 	setHealth(20);
 	setSpeed(20);
+    setHomeGround(4);
+
 	}
 }

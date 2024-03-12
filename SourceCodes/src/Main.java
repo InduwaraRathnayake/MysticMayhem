@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Main {
     private static HashMap<Integer, Integer> army;
-    private static List<Army> characters = new ArrayList<>();
+    private static List<Army> characters = new ArrayList<>(); // player class
 
     public static void main(String[] args) throws Exception {
         //1
@@ -11,12 +11,15 @@ public class Main {
 
         //2
         UserData user = new UserData();
+        Player userPlayer = new Player(user);
 
         //3
-        UserData whiteWolf = new UserData("GeraltofRivia", "whitewolf", 32);
+        UserData whiteWolf = new UserData("GeraltofRivia", "whitewolf");
+        Player whiteWolfPlayer = new Player(whiteWolf,32,215);
 
         //4
-        army = disObj.createArmyInitial();
+        army = disObj.createArmyInitial(userPlayer);
+        System.out.println(army);
         for (Map.Entry<Integer, Integer> entry : army.entrySet()) {
             int key = entry.getKey();
             int value = entry.getValue();
@@ -120,15 +123,18 @@ public class Main {
             }
         }
 
+        System.out.println("Your Army: " + characters);
+
+
         int option;
         do {
             option = disObj.showMainMenu();
-            Main.showMyMainMenu(option, user, disObj);
+            Main.MainMenu(option, user, disObj);
         } while (option != 0);
    
     }
 
-    public static void showMyMainMenu(int option, UserData user, Display disObj){
+    public static void MainMenu(int option, UserData user, Display disObj){
         switch(option){
             case 1:
                 disObj.displayProfile(user);
@@ -147,6 +153,5 @@ public class Main {
                 break;
 
         }
-
     }
 }

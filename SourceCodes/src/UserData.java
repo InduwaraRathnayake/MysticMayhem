@@ -15,10 +15,9 @@ public class UserData {
         gatherUserData();
     }
 
-    public UserData(String name, String userName, int id){{
+    public UserData(String name, String userName){{
         this.name = name;
         this.userName = userName;
-        this.id = id;
     }
 
     }
@@ -125,6 +124,11 @@ public class UserData {
         return id;
     }
 
+    public void printUserData(){
+        System.out.println("        Player name: "+ this.getName());
+        System.out.println("        User name: "+ this.getUserName());
+        System.out.println("        Player ID: "+ this.getUserID());
+    }
 
 }
 
