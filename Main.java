@@ -6,7 +6,120 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
+
 public class Main {
+	
+	// Create a list to store the characters
+    static List<Army> characters = new ArrayList<>();
+	
+	
+	public static Army getArmy(int key, int value) {
+		
+		switch (key) {
+        case 1: // Archer
+            switch (value) {
+                case 1:
+                    
+                    return new Shooter();
+                    
+                case 2:
+                	return new Ranger();
+                    
+                case 3:
+                    return new Sunfire();
+                    
+                case 4:
+                    return new Zing();
+                    
+                case 5:
+                	return new Saggitarius();
+                    
+            }
+            break;
+        case 2: // Knight
+            switch (value) {
+                case 1:
+                	return new Squire();
+                    
+                case 2:
+                	return new Cavalier();
+                    
+                case 3:
+                	return new Templar();
+                    
+                case 4:
+                	return new Zoro();
+                    
+                case 5:
+                	return new Swiftblade();
+                    
+            }
+            break;
+        case 3: // Mage
+            switch (value) {
+                case 1:
+                	return new Warlock();
+                    
+                case 2:
+                	return new Illusionist();
+                    
+                case 3:
+                	return new Enchanter();
+                    
+                case 4:
+                	return new Conjurer();
+                    
+                case 5:
+                	return new Eldritch();
+                    
+            }
+            break;
+        case 4: // Healer
+        	switch (value) {
+            case 1:
+            	return new Soother();
+                
+            case 2:
+            	return new Medic();
+                
+            case 3:
+            	return new Alchemist();
+                
+            case 4:
+            	return new Saint();
+                
+            case 5:
+            	return new Lightbringer();
+                
+        }
+        	break;
+        case 5: // MythicalCreature
+        	switch (value) {
+            case 1:
+            	return new Dragon();
+                
+            case 2:
+            	return new Basilisk();
+                
+            case 3:
+            	return new Hydra();
+                
+            case 4:
+            	return new Phoenix();
+                
+            case 5:
+            	return new Pegasus();
+                
+        	}
+    }
+		return null;
+		
+		
+		
+	}
+	
+	
+	
 	
 	
 	public static List<Army> your_army() {
@@ -21,119 +134,18 @@ public class Main {
 			key = inp.nextInt();
 			
 			value = inp.nextInt();
-	        map.put(key, value); // Archer - Warlock
-	        
-//	        map.put(2, 2); // Knight - Cavalier
-//	        map.put(3, 4); // Mage - Conjurer
-//	        map.put(4, 1); // Healer - Soother
-//	        map.put(5, 5); // MythicalCreature - Pegasus
+	        map.put(key, value); 
 		}
 
-        // Create a list to store the characters
-        List<Army> characters = new ArrayList<>();
-
+        
+        
         // Loop through the HashMap
         for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
             int key = entry.getKey();
             int value = entry.getValue();
 
-            // Create the corresponding character and add it to the list
-            switch (key) {
-                case 1: // Archer
-                    switch (value) {
-                        case 1:
-                            characters.add(new Shooter());
-                            break;
-                        case 2:
-                            characters.add(new Ranger());
-                            break;
-                        case 3:
-                            characters.add(new Sunfire());
-                            break;
-                        case 4:
-                            characters.add(new Zing());
-                            break;
-                        case 5:
-                            characters.add(new Saggitarius());
-                            break;
-                    }
-                    break;
-                case 2: // Knight
-                    switch (value) {
-                        case 1:
-                            characters.add(new Squire());
-                            break;
-                        case 2:
-                            characters.add(new Cavalier());
-                            break;
-                        case 3:
-                            characters.add(new Templar());
-                            break;
-                        case 4:
-                            characters.add(new Zoro());
-                            break;
-                        case 5:
-                            characters.add(new Swiftblade());
-                            break;
-                    }
-                    break;
-                case 3: // Mage
-                    switch (value) {
-                        case 1:
-                            characters.add(new Warlock());
-                            break;
-                        case 2:
-                            characters.add(new Illusionist());
-                            break;
-                        case 3:
-                            characters.add(new Enchanter());
-                            break;
-                        case 4:
-                            characters.add(new Conjurer());
-                            break;
-                        case 5:
-                            characters.add(new Eldritch());
-                            break;
-                    }
-                    break;
-                case 4: // Healer
-                	switch (value) {
-                    case 1:
-                        characters.add(new Soother());
-                        break;
-                    case 2:
-                        characters.add(new Medic());
-                        break;
-                    case 3:
-                        characters.add(new Alchemist());
-                        break;
-                    case 4:
-                        characters.add(new Saint());
-                        break;
-                    case 5:
-                        characters.add(new Lightbringer());
-                        break;
-                }
-                	break;
-                case 5: // MythicalCreature
-                	switch (value) {
-                    case 1:
-                        characters.add(new Dragon());
-                        break;
-                    case 2:
-                        characters.add(new Basilisk());
-                        break;
-                    case 3:
-                        characters.add(new Hydra());
-                        break;
-                    case 4:
-                        characters.add(new Phoenix());
-                        break;
-                    case 5:
-                        characters.add(new Pegasus());
-                        break;
-                	}
-            }
+            characters.add(getArmy(key,value));
+            
         }
         
         
@@ -147,12 +159,24 @@ public class Main {
 	
 	
 	
+	public static void updateArmy(List<Army> characters ,int sellno , int buyno){
+		characters.set(sellno-1,getArmy(sellno,buyno));
+		
+//		for (Army character : characters) {
+//            System.out.println(character.getter());
+//        }
+	}
+	
+	
+	
 	
 	public static void main(String[] args) {
 		
 		//Player p1 = new Player();
 		
 		List<Army> army = your_army();
+		
+		//updateArmy(characters,1,5);
         
         
 		
